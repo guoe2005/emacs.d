@@ -23,20 +23,20 @@
   :config
   (helm-mode 1))
 
-;; (use-package flycheck
-;;   :init ;; 在 (require) 之前需要执行的
-;;   (setq flycheck-emacs-lisp-load-path 'inherit)
-;;   :config
-;;   (global-flycheck-mode))
-
-;(use-package srcery-theme
-;     :config
-;     (load-theme 'srcery t))
-
-(use-package zenburn-theme
-  :ensure t
+(use-package flycheck
+  :init ;; 在 (require) 之前需要执行的
+  (setq flycheck-emacs-lisp-load-path 'inherit)
   :config
-  (load-theme 'zenburn t)) 
+  (global-flycheck-mode))
+
+(use-package srcery-theme
+    :config
+    (load-theme 'srcery t))
+
+;; (use-package zenburn-theme
+;;   :ensure t
+;;   :config
+;;   (load-theme 'zenburn t)) 
 
 (add-to-list 'load-path (expand-file-name (concat user-emacs-directory "lisp")))
 (setq gc-cons-threshold most-positive-fixnum)
@@ -291,3 +291,30 @@
   (completion-category-overrides '((file (styles partial-completion)))))
 (use-package exec-path-from-shell
   :config (exec-path-from-shell-initialize))
+
+(use-package org-download
+  :config
+  (setq-default org-download-heading-lvl nil)
+  (setq-default org-download-image-dir "C:/Users/guoe2/Pictures/Screenshots")
+  (setq org-download-backend "wget")
+  (setq org-download-abbreviate-filename-function (lambda (fn) fn)) ; use original filename
+  (defun dummy-org-download-annotate-function (link)
+    "")
+  (setq org-download-annotate-function
+        #'dummy-org-download-annotate-function)
+  )
+
+
+(when (eq system-type 'windows-nt)
+  (setq fonts '("Consolas" "微软雅黑"))
+  (set-fontset-font t 'unicode "Segoe UI Emoji" nil 'prepend)
+  (set-face-attribute 'default nil :font
+                      (format "%s:pixelsize=%d" (car fonts) 34)))
+(if (display-graphic-p)
+    (dolist (charset '(kana han symbol cjk-misc bopomofo))
+      (set-fontset-font (frame-parameter nil 'font) charset
+                        (font-spec :family (car (cdr fonts))))))
+
+
+(set-default-coding-systems 'utf-8)
+(set-language-environment "UTF-8")

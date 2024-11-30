@@ -1,7 +1,8 @@
 (use-package org-roam
 ;  :ensure t ;; 自动安装
   :custom
-  (org-roam-directory "/mnt/D/obsidian/org/") ;; 默认笔记目录, 提前手动创建好
+  ;; (org-roam-directory "/mnt/D/obsidian/org/") ;; 默认笔记目录, 提前手动创建好
+  (org-roam-directory "d:/obsidian/org/") ;; 默认笔记目录, 提前手动创建好
   (org-roam-dailies-directory "daily/") ;; 默认日记目录, 上一目录的相对路径
   (org-roam-db-gc-threshold most-positive-fixnum) ;; 提高性能
   (org-roam-complete-everywhere t)
@@ -54,40 +55,55 @@
 
 
 
+;; (setq org-capture-templates
+;;              '(("t" "Task To Do!" entry
+;;                 (file+headline "/mnt/D/obsidian/org/task.org" "GTD")
+;;                 "* TODO %^{Task Name:}\n%u\n%a\n" :clock-in t :clock-resume t)
+;;                ("r" "Book Reading Task" entry
+;;                 (file+headline "/mnt/D/obsidian/org/task.org" "Reading")
+;;                 "* TODO %^{Book Name:}\n%u\n%a\n" :clock-in t :clock-resume t)
+;;                ("j" "Journal!!!" entry
+;;                 (file+olp+datetree "/mnt/D/obsidian/org/journal.org")
+;;                 "* %U - %^{heading} %^g\n %?\n")
+;;                ("n" "Notes!!!" entry
+;;                 (file+headline "/mnt/D/obsidian/org/notes.org" "NOTES")
+;;                 "* %^{heading} %t %^g\n %?\n")
+;;                ("d" "difficulties!!!" entry
+;;                 (file+headline "/mnt/D/obsidian/org/notes.org" "难题")
+;;                 "* %a %?\n")))
+
 (setq org-capture-templates
              '(("t" "Task To Do!" entry
-                (file+headline "/mnt/D/obsidian/org/task.org" "GTD")
+                (file+headline "d:/obsidian/org/task.org" "GTD")
                 "* TODO %^{Task Name:}\n%u\n%a\n" :clock-in t :clock-resume t)
                ("r" "Book Reading Task" entry
-                (file+headline "/mnt/D/obsidian/org/task.org" "Reading")
+                (file+headline "d:/obsidian/org/task.org" "Reading")
                 "* TODO %^{Book Name:}\n%u\n%a\n" :clock-in t :clock-resume t)
                ("j" "Journal!!!" entry
-                (file+olp+datetree "/mnt/D/obsidian/org/journal.org")
+                (file+olp+datetree "d:/obsidian/org/journal.org")
                 "* %U - %^{heading} %^g\n %?\n")
                ("n" "Notes!!!" entry
-                (file+headline "/mnt/D/obsidian/org/notes.org" "NOTES")
+                (file+headline "d:/obsidian/org/notes.org" "NOTES")
                 "* %^{heading} %t %^g\n %?\n")
                ("d" "difficulties!!!" entry
-                (file+headline "/mnt/D/obsidian/org/notes.org" "难题")
-                "* %a %?\n")))
+                (file+headline "d:/obsidian/org/notes.org" "难题")
+                "* %a %T %?\n")))
 
 (require 'ox-latex)
 (add-to-list 'org-latex-classes
              '("article"
                "\\documentclass{article}
-                \\usepackage{ctex}
-                \\usepackage{hyperref}
-\\usepackage{amsmath,nccmath}
                  [NO-DEFAULT-PACKAGES]
-                 [NO-PACKAGES]"
+                 [PACKAGES]
+                 [EXTRA]"
                ("\\section{%s}" . "\\section*{%s}")
                ("\\subsection{%s}" . "\\subsection*{%s}")
                ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
                ("\\paragraph{%s}" . "\\paragraph*{%s}")
                ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
 
-(setq org-latex-compiler "xelatex")
-(setq org-latex-pdf-process '("xelatex %f"))
+(setq org-latex-compiler "pdflatex")
+(setq org-latex-pdf-process '("pdflatex %f"))
 
 ;; 生成PDF后清理辅助文件
 ;; https://answer-id.com/53623039
