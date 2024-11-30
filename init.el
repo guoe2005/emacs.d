@@ -305,16 +305,16 @@
   )
 
 
-(when (eq system-type 'windows-nt)
-  (setq fonts '("Consolas" "微软雅黑"))
-  (set-fontset-font t 'unicode "Segoe UI Emoji" nil 'prepend)
-  (set-face-attribute 'default nil :font
-                      (format "%s:pixelsize=%d" (car fonts) 34)))
-(if (display-graphic-p)
-    (dolist (charset '(kana han symbol cjk-misc bopomofo))
-      (set-fontset-font (frame-parameter nil 'font) charset
-                        (font-spec :family (car (cdr fonts))))))
+;; (when (eq system-type 'windows-nt)
+;;   (setq fonts '("Consolas" "微软雅黑"))
+;;   (set-fontset-font t 'unicode "Segoe UI Emoji" nil 'prepend)
+;;   (set-face-attribute 'default nil :font
+;;                       (format "%s:pixelsize=%d" (car fonts) 34)))
+;; (if (display-graphic-p)
+;;     (dolist (charset '(kana han symbol cjk-misc bopomofo))
+;;       (set-fontset-font (frame-parameter nil 'font) charset
+;;                         (font-spec :family (car (cdr fonts))))))
 
 
-(set-default-coding-systems 'utf-8)
-(set-language-environment "UTF-8")
+;; (set-default-coding-systems 'utf-8)
+;; (set-language-environment "UTF-8")
