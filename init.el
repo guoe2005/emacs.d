@@ -132,6 +132,12 @@
                 (call-interactively #'eglot-code-action-organize-imports))))
   (add-hook 'eglot--managed-mode-hook #'eglot-actions-before-save))
 
+(require 'rust-mode)
+(add-hook 'rust-mode-hook 'eglot-ensure)
+(use-package rust-mode
+  :init
+  (setq rust-mode-treesitter-derive t))
+
 (use-package ivy
  :ensure t
  :init
@@ -318,3 +324,51 @@
 
 ;; (set-default-coding-systems 'utf-8)
 ;; (set-language-environment "UTF-8")
+
+(add-to-list 'load-path "~/.emacs.d/lisp/cndict/")
+(require 'cndict)
+;; Change 应用ID and 应用秘钥 to yours
+(setq youdao-dictionary-app-key "693be602850d0a15"
+      youdao-dictionary-secret-key "ZsB7cscDT2nPduYaVmZ9xSNxyk5Bs3Cf")
+
+(add-to-list 'load-path "~/.emacs.d/lisp/emacs-application-framework/")
+(require 'eaf)
+(require 'eaf-map)
+(require 'eaf-git)
+(require 'eaf-file-sender)
+(require 'eaf-file-browser)
+(require 'eaf-video-player)
+(require 'eaf-markdown-previewer)
+(require 'eaf-pdf-viewer)
+(require 'eaf-rss-reader)
+(require 'eaf-org-previewer)
+(require 'eaf-file-manager)
+(require 'eaf-markmap)
+(require 'eaf-terminal)
+(require 'eaf-js-video-player)
+(require 'eaf-demo)
+(require 'eaf-image-viewer)
+(require 'eaf-mindmap)
+(require 'eaf-browser)
+(require 'eaf-jupyter)
+
+
+(defun my-org-oxauto ()
+  "Auto export when saving for Org mode."
+  (let ((oxauto (org-collect-keywords '("oxauto"))))
+    (when oxauto
+      (dolist (keywords oxauto)
+        (let ((export-formats (split-string (cadr keywords) "," t " ")))
+          (dolist (export-format export-formats)
+            (pcase export-format
+              ("latex"
+               (setq org-export-in-background t)
+               (add-hook 'after-save-hook 'org-latex-export-to-latex nil t))
+              ("html"
+               (setq org-export-in-background t)
+               (add-hook 'after-save-hook 'org-html-export-to-html nil t))
+              ("pdf"
+               (setq org-export-in-background t)
+               (add-hook 'after-save-hook 'org-latex-export-to-pdf nil t))
+              )))))))
+(add-hook 'org-mode-hook 'my-org-oxauto)

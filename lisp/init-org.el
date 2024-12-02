@@ -93,6 +93,8 @@
 (add-to-list 'org-latex-classes
              '("article"
                "\\documentclass{article}
+                \\usepackage{hyperref}
+                \\usepackage{ctex}
                  [NO-DEFAULT-PACKAGES]
                  [PACKAGES]
                  [EXTRA]"
