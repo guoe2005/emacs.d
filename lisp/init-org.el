@@ -92,7 +92,7 @@
 (require 'ox-latex)
 (add-to-list 'org-latex-classes
              '("article"
-               "\\documentclass{article}
+               "\\documentclass[12pt,a4paper]{article}
                 \\usepackage{hyperref}
                 \\usepackage{ctex}
                  [NO-DEFAULT-PACKAGES]
